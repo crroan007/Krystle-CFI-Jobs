@@ -37,8 +37,8 @@ tracked_schools:
     type: "Part 141 & 61"
     fleet: "Unknown -- inquire"
     pay: "$20/hr confirmed (contract)"
-    notes: "Part-time contract CFI confirmed at $20/hr for ground+flight"
-    enabled: true
+    notes: "Part-time contract CFI confirmed at $20/hr for ground+flight. WEBSITE DOWN as of 2026-04-09."
+    enabled: false
     distance_min: 10
 
   - name: South Atlanta Flight Training
@@ -46,7 +46,8 @@ tracked_schools:
     careers_url: https://flysaft.com
     type: "Part 141"
     fleet: "Unknown"
-    enabled: true
+    notes: "CLOSED May 2024 per Yelp. Domain unreachable."
+    enabled: false
     distance_min: 10
 
   - name: Faithful Guardian Aviation
@@ -56,6 +57,17 @@ tracked_schools:
     type: "Part 61"
     fleet: "C172N, C182, C310, C421, Piper Warrior, Cherokee 6 + 2 sims"
     notes: "Large fleet, 100K+ combined hours. Worth calling."
+    enabled: true
+    distance_min: 10
+
+  - name: ACE (Aviation Career Enrichment)
+    airport: KFTY
+    careers_url: https://www.flyace.org
+    phone: "(404) 691-0441"
+    email: ACE.FlightOps@gmail.com
+    type: "Nonprofit"
+    fleet: "Unknown"
+    notes: "Nonprofit flight school, 46+ years of service. Youth + adult programs."
     enabled: true
     distance_min: 10
 
@@ -85,32 +97,50 @@ tracked_schools:
     careers_url: https://www.academyofaviation.com/atlanta/
     type: "Part 141"
     fleet: "Unknown"
-    notes: "Delta Propel partner. CFI/CFII/MEI program."
+    notes: "Delta Propel partner. CFI/CFII/MEI program. Confirmed not hiring 2026-04-09."
     enabled: true
     distance_min: 25
 
-  - name: Centennial Aviation Academy
-    airport: KFFC
-    careers_url: https://www.flywithcaa.com
-    phone: "(678) 686-9086"
-    email: support@flywithcaa.com
-    type: "Part 61"
-    fleet: "Unknown"
-    notes: "AOPA Distinguished Flight School 2021-22, top 10 nationally."
-    enabled: true
-    distance_min: 25
-
-  - name: FLYT Aviation / US Aviation Academy
+  - name: FLYT Aviation
     airport: KFFC
     careers_url: https://www.flytaviation.com
     type: "Part 141"
     fleet: "Unknown"
     pay: "~$32/hr average (Glassdoor)"
-    notes: "90%+ instructor hiring rate for graduates. Career pathway."
+    notes: "CLOSED -- domain expired. Disabled 2026-04-09."
+    enabled: false
+    distance_min: 25
+
+  - name: US Aviation Academy
+    airport: KFFC
+    careers_url: https://www.usaviationacademy.com/atlanta-georgia-flight-school/
+    type: "Part 141"
+    fleet: "Unknown"
+    notes: "BLOCKED - do not contact. Formerly operated as FLYT Aviation at KFFC."
+    enabled: false
+    distance_min: 25
+
+  - name: Sorenson Aviation
+    airport: KFFC
+    careers_url: https://www.sorensonaviation.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Small operation, 100% checkride rate. Est. 2019."
     enabled: true
     distance_min: 25
 
   # --- KPDK - DeKalb-Peachtree (~25 min) ---
+
+  - name: Centennial Aviation Academy
+    airport: KPDK
+    careers_url: https://www.flywithcaa.com
+    phone: "(678) 686-9086"
+    email: support@flywithcaa.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "AOPA Distinguished Flight School."
+    enabled: true
+    distance_min: 20
 
   - name: Skybound Aviation
     airport: KPDK
@@ -167,6 +197,16 @@ tracked_schools:
     fleet: "Unknown"
     notes: "Steve Shaner, 50+ yrs experience."
     enabled: true
+    distance_min: 25
+
+  - name: Air Ventures PDK
+    airport: KPDK
+    careers_url: https://www.bestaviation.net/school/air-ventures-pdk/
+    phone: "(770) 458-0001"
+    type: "Part 61"
+    fleet: "C172SP, C182, PA-32-R301, PA-23-250"
+    notes: "CLOSED per Yelp March 2026. Do not contact."
+    enabled: false
     distance_min: 25
 
   - name: Lanier Flight Center (PDK)
@@ -234,8 +274,8 @@ tracked_schools:
     careers_url: https://hangar913.com
     type: "Part 61"
     fleet: "Unknown"
-    notes: "Budget-friendly training."
-    enabled: true
+    notes: "Budget-friendly training. Website appears empty/under construction as of 2026-04-09."
+    enabled: false
     distance_min: 30
 
   # --- KCCO - Newnan-Coweta (~30 min) ---
@@ -276,6 +316,16 @@ tracked_schools:
     type: "Part 141 & 61"
     fleet: "Unknown"
     notes: "PPL, IR, Comm, CFI training."
+    enabled: true
+    distance_min: 40
+
+  - name: Lookup Flight Academy
+    airport: KLZU
+    careers_url: https://lookupflightacademy.com
+    phone: "(770) 341-4277"
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Career and leisure pilot programs. Financing available."
     enabled: true
     distance_min: 40
 

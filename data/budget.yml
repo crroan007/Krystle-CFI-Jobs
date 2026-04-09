@@ -2,6 +2,11 @@
 # Last updated: 2026-04-09
 
 starting_cash: 82616
+
+# ── Two separate buckets ──
+living_fund: 52616    # $82,616 - $30,000 = for bills/living
+flight_fund: 30000    # Earmarked for flight hours ONLY
+
 cash_breakdown:
   - label: "Primary savings"
     amount: 46564
@@ -44,7 +49,9 @@ hours_remaining: 330
 
 # Pre-calculated projections
 fixed_burn_6_months: 42000  # 6 x $7,000
-available_for_flying: 40616  # $82,616 - $42,000
+living_runway_months: 7.5   # $52,616 / $7,000
+flight_fund_at_75hr: 400    # $30,000 / $75 = 400 hours of rental
+available_for_flying: 30000 # Dedicated flight fund
 
 # ============================================================
 # SCENARIO PROJECTIONS

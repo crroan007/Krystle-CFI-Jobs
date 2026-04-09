@@ -1,6 +1,31 @@
 # Mode: scan -- Flight School Job Scanner
 
-Scans 30+ Atlanta-area flight school career pages, job boards, and Craigslist for CFI/CFII openings. Filters by relevance and adds new postings to the pipeline for evaluation.
+Scans Atlanta-area flight school career pages, job boards, and web sources for CFI/CFII openings. **Only reports VERIFIED, active postings** -- no evergreen pages, no closed businesses, no stale listings.
+
+## VERIFICATION RULES (CRITICAL)
+
+**A listing is ONLY considered "active" if it meets at least ONE of these criteria:**
+1. **Dated job posting** on Indeed, LinkedIn, Glassdoor, ZipRecruiter, or JSfirm posted within the last 60 days
+2. **Specific "Now Hiring" language** with a date, position title, and application instructions
+3. **Direct confirmation** from the school (phone call, email reply, social media post within 30 days)
+
+**These do NOT count as active listings:**
+- Undated "Careers" or "Join Our Team" pages (evergreen)
+- Generic "We're always looking for great people" language
+- Job board results with no post date visible
+- Listings for a school that has closed, merged, or rebranded
+
+**Before adding any posting to the pipeline, you MUST:**
+1. Verify the business is currently operating (Google Maps, recent reviews within 6 months, active social media)
+2. Check if the specific job posting has a date or was cross-posted to a major job board with a date
+3. If the only evidence is an undated careers page, mark it as `cold-outreach` NOT `active-posting`
+
+**Verification tier labels:**
+- `verified-active` -- Dated posting on job board OR confirmed by school
+- `likely-active` -- Recent hiring signals (social media post, student reviews mentioning hiring, multiple job board appearances) but no single dated post
+- `cold-outreach` -- Business exists but no confirmed opening. Worth contacting.
+- `unverified` -- Cannot confirm business is operating or posting is real
+- `stale-closed` -- Business closed, listing expired, or confirmed not hiring
 
 ## Recommended Execution
 
@@ -27,28 +52,24 @@ Read `config/portals.yml` which contains:
 ### Tier 1 -- Flight School Career Pages (PRIMARY)
 
 For each school in `tracked_schools` with `enabled: true`:
-1. Navigate to `careers_url` with Playwright (`browser_navigate` + `browser_snapshot`)
-2. Look for any job listings, "Now Hiring" notices, or instructor openings
-3. Extract: title, URL, school name, any pay/schedule info visible
-4. If page has no explicit job listings, note whether there's a "Contact Us" or "Join Our Team" link
+1. WebSearch "{school name} hiring flight instructor 2026" or "{school name} CFI job"
+2. WebFetch the `careers_url` to read content
+3. Check for DATED job postings (not just generic careers pages)
+4. Cross-reference: WebSearch "site:indeed.com {school name} flight instructor"
+5. Verify business is operating: check for recent Google reviews, active website, social media activity
 
-**Many flight schools don't have formal job boards.** Instead look for:
-- "Now Hiring" banners or text
-- "Join Our Team" pages
-- "Become an Instructor" sections
-- Contact forms with "Employment Inquiry" options
-- Even just a general contact page (worth a cold outreach)
-
-If `careers_url` returns 404 or doesn't load, try the school's main domain and look for careers/jobs/hiring links.
+**IMPORTANT: Many flight schools have fake or stale "careers" pages.** A page that says "Join Our Team" with no date, no specific position, and no application process is NOT a real job posting. Mark these as `cold-outreach` only.
 
 ### Tier 2 -- Aviation Job Boards (COMPLEMENTARY)
 
 For each board in `job_boards`:
-- **JSfirm**: Navigate to URL, scrape job listings. Filter for Georgia/Atlanta.
-- **Pilot Career Center**: Navigate and extract listings.
-- **PDK Airport Jobs**: Navigate and extract listings.
-- **Avjobs**: Navigate and extract listings.
-- **Skyfarer Academy**: Check for independent instructor opportunities.
+- **JSfirm**: Search for Georgia/Atlanta CFI/CFII postings. Note post dates.
+- **Indeed**: Search "flight instructor Atlanta GA" -- sort by date, only include last 60 days.
+- **LinkedIn**: Search for flight instructor positions in Atlanta metro.
+- **ZipRecruiter**: Check for recent CFI postings.
+- **Glassdoor**: Check for recent CFI postings.
+
+**Job board results MUST have a post date.** Undated results are treated as unverified.
 
 ### Tier 3 -- Craigslist RSS & Personal Ads (BROAD DISCOVERY)
 
@@ -58,36 +79,28 @@ For each feed in `personal_ads`:
 - These often catch individuals looking for flight instruction privately
 - Mark as `post_type: personal_ad` in pipeline
 
-**Craigslist search terms to use:**
-- "flight instructor"
-- "CFI" / "CFII"
-- "flight lessons" / "flight training"
-- "learn to fly"
-- "instrument training"
-
 ## Workflow
 
 1. **Read configuration**: `config/portals.yml`
 2. **Read history**: `data/scan-history.tsv` for URLs already seen
 3. **Read dedup sources**: `data/applications.md` + `data/pipeline.md`
 
-4. **Tier 1 scan** (sequential -- one Playwright session):
+4. **Tier 1 scan**:
    For each school with `enabled: true`:
-   a. `browser_navigate` to `careers_url`
-   b. `browser_snapshot` to read content
-   c. Extract any job postings or hiring signals
-   d. If hiring signal found but no formal listing, create a "cold outreach" entry
+   a. WebSearch for the school + "hiring" or "CFI job"
+   b. WebFetch `careers_url` to read content
+   c. Cross-reference on Indeed/LinkedIn for dated postings
+   d. **Verify business is operating** (recent reviews, active site)
+   e. Assign verification tier: `verified-active`, `likely-active`, `cold-outreach`, `unverified`, or `stale-closed`
 
-5. **Tier 2 scan** (can run WebFetch in parallel):
-   For each job board:
-   a. Fetch or navigate to the URL
-   b. Extract listings matching title_filter
-   c. Accumulate candidates
+5. **Tier 2 scan** (job boards -- search for dated postings):
+   a. Search each job board for Atlanta/Georgia CFI/CFII positions
+   b. Only include postings with visible dates within last 60 days
+   c. Cross-reference school names against portals.yml
 
-6. **Tier 3 scan** (RSS feeds -- fast):
-   For each RSS feed:
-   a. WebFetch the RSS URL
-   b. Parse for new entries
+6. **Tier 3 scan** (RSS feeds):
+   a. WebFetch each RSS URL
+   b. Parse for new entries with dates
    c. Mark post_type as personal_ad
 
 7. **Filter by title** using `title_filter`:
@@ -99,11 +112,11 @@ For each feed in `personal_ads`:
    - `applications.md` -- school + role already tracked
    - `pipeline.md` -- URL already pending
 
-9. **For each new posting that passes filters**:
-   a. Add to `data/pipeline.md` under "Pending": `- [ ] {url} | {school} | {title} | {airport} | {distance}min`
-   b. Register in `data/scan-history.tsv`: `{url}\t{date}\t{source}\t{title}\t{school}\tadded`
+9. **For each VERIFIED new posting**:
+   a. Add to `data/pipeline.md` under "Pending" with verification tier
+   b. Register in `data/scan-history.tsv`: `{url}\t{date}\t{source}\t{title}\t{school}\t{verification_tier}`
 
-10. **Filtered/duplicate entries**: Register in `scan-history.tsv` with status `skipped_title` or `skipped_dup`
+10. **Unverified/cold-outreach entries**: Still register in `scan-history.tsv` but clearly mark the tier
 
 ## Output Summary
 
@@ -112,34 +125,31 @@ Flight School Scan -- {YYYY-MM-DD}
 =================================
 Schools scanned: N / N total
 Job boards checked: N
-Craigslist feeds: N
 Total postings found: N
-Filtered by title: N
-Duplicates: N
-New added to pipeline: N
 
-NEW OPENINGS:
-  + {school} ({airport}, {distance}min) | {title} | {pay if known}
-  + ...
+VERIFIED ACTIVE POSTINGS:
+  [verified-active] {school} ({airport}, {distance}min) | {title} | {pay} | Posted: {date} | Source: {where found}
 
-SCHOOLS WITH HIRING SIGNALS (no formal listing):
-  ~ {school} ({airport}) | "Now Hiring" on homepage | Contact: {phone/email}
-  ~ ...
+LIKELY ACTIVE (strong signals, not fully confirmed):
+  [likely-active] {school} ({airport}) | {signals found} | Recommended: call to confirm
 
-SCHOOLS WITH NO OPENINGS DETECTED:
-  - {school} ({airport}) | Last scanned: {date}
+COLD OUTREACH (business active, no confirmed opening):
+  [cold-outreach] {school} ({airport}) | Contact: {phone/email}
 
--> Run /flight-school-jobs pipeline to evaluate new postings.
--> Run /flight-school-jobs contact {school} to draft outreach for schools with hiring signals.
+STALE / CLOSED / NOT HIRING:
+  [stale-closed] {school} -- {reason}
+
+-> Run /flight-school-jobs pipeline to evaluate verified postings.
+-> Run /flight-school-jobs contact {school} to draft outreach for cold-outreach schools.
 ```
 
-## Cold Outreach Detection
+## Business Verification Checklist
 
-Even if a school has no formal job listing, these signals mean they might hire:
-- "Join Our Team" or "Careers" page exists (even if empty)
-- "Now Hiring" text anywhere on site
-- Multiple student reviews mentioning "need more instructors"
-- School has a large fleet (5+ aircraft) but few listed instructors
-- School is Part 141 (standardized training = consistent instructor demand)
+Before marking a school as a valid lead, confirm:
+- [ ] Website loads and has current content (not a parked domain)
+- [ ] Google Maps shows "Open" with recent reviews (within 6 months)
+- [ ] Phone number is callable (not disconnected)
+- [ ] Social media has recent activity (if applicable)
+- [ ] No news articles about closure, bankruptcy, or acquisition
 
-When detected, add to the scan summary as "hiring signal" and suggest using `/flight-school-jobs contact` for cold outreach.
+If any of these fail, mark as `unverified` or `stale-closed` and note why.

@@ -34,11 +34,12 @@
 
   // ── Load Data ────────────────────────────────────────
 
-  const [stats, budget, schools, reports, tracker] = await Promise.all([
+  const [stats, budget, schools, reports, pipeline, tracker] = await Promise.all([
     fetchJSON('/api/stats'),
     fetchJSON('/api/budget'),
     fetchJSON('/api/schools'),
     fetchJSON('/api/reports'),
+    fetchJSON('/api/pipeline'),
     fetchJSON('/api/tracker'),
   ]);
 
@@ -47,6 +48,108 @@
   if (stats) {
     $('#header-subtitle').textContent = `${stats.candidate.name} -- CFII Command Center`;
     $('#last-updated').textContent = `Updated ${new Date(stats.updated).toLocaleString()}`;
+  }
+
+  // ── Active Job Postings ──────────────────────────────
+
+  if (pipeline && pipeline.postings) {
+    // Separate into categories
+    const verified = [];
+    const confirm = [];
+    const cold = [];
+    const applied = [];
+    const notPursuing = [];
+
+    pipeline.postings.forEach(p => {
+      if (!p.school) return;
+      const sec = p.section.toLowerCase();
+      const det = (p.detail || '').toLowerCase();
+      const role = (p.role || '').toLowerCase();
+
+      // Extract Part 61/141 tag
+      if (role.includes('part 141/61') || role.includes('part 61/141')) p.partType = '141/61';
+      else if (role.includes('part 141')) p.partType = '141';
+      else if (role.includes('part 61')) p.partType = '61';
+      else if (det.includes('part 141/61') || det.includes('part 61/141')) p.partType = '141/61';
+      else if (det.includes('part 141')) p.partType = '141';
+      else if (det.includes('part 61')) p.partType = '61';
+
+      if (sec.includes('not pursuing') || sec.includes('not returning') || sec.includes('processed')) {
+        notPursuing.push(p);
+      } else if (det.includes('applied') || (p.done && sec.includes('verified'))) {
+        applied.push(p);
+      } else if (sec.includes('verified')) {
+        verified.push(p);
+      } else if (sec.includes('likely')) {
+        confirm.push(p);
+      } else if (sec.includes('cold') && sec.includes('141')) {
+        p._sub = '141';
+        cold.push(p);
+      } else if (sec.includes('cold')) {
+        cold.push(p);
+      }
+    });
+
+    const liveCount = verified.length + confirm.length;
+    $('#postings-count').textContent = `${liveCount} live, ${cold.length} outreach`;
+
+    function renderPosting(p, tierLabel, tierClass, cardClass, actionClass, actionText) {
+      const linkUrl = p.url || '';
+      const phoneMatch = p.school.match(/\(([\d\-\s]+)\)/);
+
+      let actionHtml;
+      if (actionClass === 'action-applied') {
+        actionHtml = `<span class="posting-action action-applied">${actionText}</span>`;
+      } else if (linkUrl) {
+        actionHtml = `<a href="${linkUrl}" target="_blank" class="posting-action ${actionClass}">${actionText}</a>`;
+      } else if (phoneMatch) {
+        actionHtml = `<a href="tel:${phoneMatch[1].replace(/[^\d]/g, '')}" class="posting-action ${actionClass}">${actionText}</a>`;
+      } else {
+        actionHtml = `<span class="posting-action ${actionClass}">${actionText}</span>`;
+      }
+
+      const partBadge = p.partType
+        ? `<span class="part-badge part-${p.partType.replace('/', '')}">${p.partType.includes('/') ? 'Part 141/61' : 'Part ' + p.partType}</span>`
+        : '';
+
+      return `<div class="posting-card ${cardClass}">
+        <span class="posting-tier ${tierClass}">${tierLabel}</span>
+        <div class="posting-info">
+          <div class="posting-school">${p.school} ${partBadge}</div>
+          <div class="posting-role">${p.role}</div>
+          ${p.detail ? `<div class="posting-detail">${p.detail}</div>` : ''}
+        </div>
+        ${actionHtml}
+      </div>`;
+    }
+
+    let html = '';
+
+    if (applied.length) {
+      html += '<div class="posting-section-label">Already Applied</div>';
+      html += applied.map(p => renderPosting(p, 'Applied', 'tier-applied', 'posting-applied', 'action-applied', 'Applied')).join('');
+    }
+    if (verified.length) {
+      html += '<div class="posting-section-label">Verified Openings -- Apply Now</div>';
+      html += verified.map(p => renderPosting(p, 'Verified', 'tier-verified', 'posting-verified', 'action-apply', 'Apply Now')).join('');
+    }
+    if (confirm.length) {
+      html += '<div class="posting-section-label">Likely Hiring -- Call to Confirm</div>';
+      html += confirm.map(p => renderPosting(p, 'Confirm', 'tier-likely', 'posting-likely', 'action-call', 'Call')).join('');
+    }
+    const cold141 = cold.filter(p => p._sub === '141' || p.partType === '141' || p.partType === '141/61');
+    const cold61 = cold.filter(p => !cold141.includes(p));
+
+    if (cold141.length) {
+      html += '<div class="posting-section-label">Cold Outreach -- Part 141 Schools</div>';
+      html += cold141.map(p => renderPosting(p, 'Outreach', 'tier-cold', 'posting-cold', 'action-call', 'Call')).join('');
+    }
+    if (cold61.length) {
+      html += '<div class="posting-section-label">Cold Outreach -- Part 61 Schools</div>';
+      html += cold61.map(p => renderPosting(p, 'Outreach', 'tier-cold', 'posting-cold', 'action-call', 'Call')).join('');
+    }
+
+    $('#postings-list').innerHTML = html || '<div class="empty-state">No postings in pipeline yet.</div>';
   }
 
   // ── Hero: Hours ──────────────────────────────────────
@@ -76,16 +179,29 @@
     `).join('');
   }
 
-  // ── Hero: Budget ─────────────────────────────────────
+  // ── Hero: Living Fund + Flight Fund ─────────────────
 
   if (stats && stats.budget) {
     const b = stats.budget;
-    const monthsLeft = Math.floor(b.starting_cash / b.monthly_bills);
-    const budgetPct = Math.min(100, pct(b.starting_cash, b.starting_cash)); // starts at 100
-    $('#budget-display').textContent = money(b.starting_cash);
-    $('#budget-bar').style.width = budgetPct + '%';
-    $('#budget-bills').textContent = `${money(b.monthly_bills)}/mo bills`;
-    $('#budget-months').textContent = `~${monthsLeft} months runway`;
+    const livingFund = b.living_fund || b.starting_cash;
+    const flightFund = b.flight_fund || 0;
+    const livingMonths = Math.floor(livingFund / b.monthly_bills);
+    const livingPct = Math.min(100, pct(livingFund, b.starting_cash));
+
+    $('#living-display').textContent = money(livingFund);
+    $('#living-bar').style.width = livingPct + '%';
+    $('#living-bills').textContent = `${money(b.monthly_bills)}/mo bills`;
+    $('#living-months').textContent = `~${livingMonths} months runway`;
+
+    // Flight Fund
+    const rentalRate = 75;
+    const rentalHrs = Math.floor(flightFund / rentalRate);
+    const flightPct = Math.min(100, pct(flightFund, b.starting_cash));
+
+    $('#flight-display').textContent = money(flightFund);
+    $('#flight-bar').style.width = flightPct + '%';
+    $('#flight-hours').textContent = `${fmt(rentalHrs)} rental hrs @ $${rentalRate}`;
+    $('#flight-pct').textContent = 'earmarked';
   }
 
   // ── Quick Stats ──────────────────────────────────────

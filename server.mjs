@@ -107,7 +107,34 @@ app.get('/api/reports/:file', (req, res) => {
 // Pipeline
 app.get('/api/pipeline', (_req, res) => {
   const md = readFile('data/pipeline.md');
-  res.json({ raw: md });
+  if (!md) return res.json({ postings: [] });
+
+  const lines = md.split('\n');
+  const postings = [];
+  let currentSection = '';
+
+  for (const line of lines) {
+    if (line.startsWith('## ') || line.startsWith('### ')) {
+      currentSection = line.replace(/^#+\s*/, '').trim();
+      continue;
+    }
+    const match = line.match(/^- \[([ x])\]\s*(https?:\/\/\S+)?\s*\|?\s*(.*)/);
+    if (!match) continue;
+    const done = match[1] === 'x';
+    const url = (match[2] || '').trim();
+    const rest = (match[3] || '').trim();
+    const parts = rest.split('|').map(p => p.trim());
+
+    postings.push({
+      done,
+      url,
+      school: parts[0] || '',
+      role: parts[1] || '',
+      detail: parts[2] || '',
+      section: currentSection,
+    });
+  }
+  res.json({ postings });
 });
 
 // Scan history
@@ -164,8 +191,11 @@ app.get('/api/stats', (_req, res) => {
     },
     budget: {
       starting_cash: budget.starting_cash || 0,
+      living_fund: budget.living_fund || 0,
+      flight_fund: budget.flight_fund || 0,
       monthly_bills: budget.monthly_bills || 0,
       months_remaining: budget.budget_months || 0,
+      living_runway_months: budget.living_runway_months || 0,
       danger_zone: budget.danger_zone || 0,
     },
     applications: {

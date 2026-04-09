@@ -1,14 +1,16 @@
 url	first_seen	source	title	company	status
-https://flysafi.com	2026-04-09	websearch	CFI/CFII	SAFI (South Atlanta Flight Instruction)	pending
-https://www.academyofaviation.com/employment.html	2026-04-09	websearch	Flight Instructor (CFI/CFII/MEI)	Academy of Aviation	pending
-https://www.atlantaairacademy.com/general-5	2026-04-09	websearch	Full-Time Flight Instructor	Atlanta Air Academy	pending
-https://fultonaviation.com	2026-04-09	websearch	Part-Time CFI (Contract)	Fulton Aviation	pending
+https://www.linkedin.com/jobs/view/4003144956	2026-04-09	linkedin	Flight Instructor CFII	All2fly Aviation Academy	verified-active
+https://www.atlantaairacademy.com/general-5	2026-04-09	website	Full-Time Flight Instructor	Atlanta Air Academy	evergreen-careers-page
+https://www.usaviationacademy.com	2026-04-09	indeed	CFI (4 jobs listed)	US Aviation Academy	passed-hostile-work-environment
+https://www.horizonaviationga.com	2026-04-09	website	CFI/CFII	Horizon Aviation	cold-outreach
+https://faithfulguardianaviation.com	2026-04-09	website	CFI/CFII	Faithful Guardian Aviation	cold-outreach
+https://www.skybnd.com	2026-04-09	website	CFI/CFII	Skybound Aviation	cold-outreach
+https://flysafi.com	2026-04-09	website	CFI/CFII	SAFI	cold-outreach
+https://nspireaviation.com	2026-04-09	website	CFI/CFII	NSPIRE Aviation	cold-outreach
+https://speedwayft.com	2026-04-09	website	CFI/CFII	Speedway Flight Training	cold-outreach
+https://all2flyaviation.com	2026-04-09	website	CFI/CFII	All2fly Aviation Academy	verified-active
+https://www.academyofaviation.com/employment.html	2026-04-09	websearch	Flight Instructor	Academy of Aviation	not-hiring-confirmed
+https://fultonaviation.com	2026-04-09	websearch	Part-Time CFI	Fulton Aviation	stale-website-down
 https://careers.flightsafety.com/job/Atlanta-Flight-Instructor-GA-30354/1377730800/	2026-04-09	websearch	Flight Instructor (Simulator)	FlightSafety International	skip-atp-required
-https://www.horizonaviationga.com	2026-04-09	websearch	CFI/CFII (cold outreach)	Horizon Aviation	pending
-https://faithfulguardianaviation.com	2026-04-09	websearch	CFI/CFII (cold outreach)	Faithful Guardian Aviation	pending
-https://www.skybnd.com	2026-04-09	websearch	CFI/CFII (contractor)	Skybound Aviation	pending
-https://all2flyaviation.com	2026-04-09	websearch	CFI/CFII	All2fly Aviation Academy	pending
-https://nspireaviation.com	2026-04-09	websearch	CFI/CFII	NSPIRE Aviation	pending
-https://speedwayft.com	2026-04-09	websearch	CFI/CFII	Speedway Flight Training	pending
-https://flycorps.com/careers	2026-04-09	websearch	CFII (500 dual given req)	Fly Corps Aviation	skip-too-far
 https://atpflightschool.com/jobs/	2026-04-09	websearch	CFI	ATP Flight School	skip-internal-only
+https://flycorps.com/careers	2026-04-09	websearch	CFII	Fly Corps Aviation	skip-too-far

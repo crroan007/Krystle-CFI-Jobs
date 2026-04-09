@@ -95,6 +95,9 @@ main {
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
+.hero.hero-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .hero-card {
   background: white;
   border-radius: var(--radius);
@@ -110,7 +113,8 @@ main {
   height: 4px;
 }
 .hours-card::before { background: linear-gradient(90deg, var(--blue-500), var(--blue-400)); }
-.budget-card::before { background: linear-gradient(90deg, var(--green-500), var(--amber-500)); }
+.living-card::before { background: linear-gradient(90deg, var(--green-500), var(--amber-500)); }
+.flight-card::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-400)); }
 .hero-label {
   font-size: 13px;
   font-weight: 600;
@@ -139,8 +143,11 @@ main {
   background: linear-gradient(90deg, var(--blue-600), var(--blue-400));
   transition: width 1s ease;
 }
-.budget-fill {
+.budget-fill, .living-fill {
   background: linear-gradient(90deg, var(--green-500), var(--amber-500));
+}
+.flight-fill {
+  background: linear-gradient(90deg, var(--blue-600), var(--blue-400));
 }
 .hero-sub {
   display: flex;
@@ -357,6 +364,103 @@ tbody tr:hover { background: var(--blue-50); }
 }
 .school-contact a:hover { text-decoration: underline; }
 
+/* ── Postings ────────────────────────────────────────── */
+.postings-list { display: flex; flex-direction: column; gap: 8px; }
+.posting-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-400);
+  margin-top: 12px;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.posting-section-label:first-child { margin-top: 0; }
+.posting-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.posting-card:hover {
+  border-color: var(--blue-400);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.posting-card.posting-applied {
+  border-left: 4px solid var(--green-500);
+  background: var(--green-100);
+}
+.posting-card.posting-verified {
+  border-left: 4px solid var(--blue-500);
+}
+.posting-card.posting-likely {
+  border-left: 4px solid var(--amber-500);
+}
+.posting-card.posting-cold {
+  border-left: 4px solid var(--gray-400);
+}
+.posting-tier {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: center;
+}
+.tier-applied { background: var(--green-500); color: white; }
+.tier-verified { background: var(--blue-500); color: white; }
+.tier-likely { background: var(--amber-500); color: white; }
+.tier-cold { background: var(--gray-200); color: var(--gray-600); }
+.part-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.part-14161 { background: #e8daef; color: #6c3483; }
+.part-141 { background: #d6eaf8; color: #1a5276; }
+.part-61 { background: #fef5e7; color: #b7791f; }
+.posting-info { flex: 1; }
+.posting-school { font-weight: 700; font-size: 15px; color: var(--gray-900); }
+.posting-role { font-size: 13px; color: var(--gray-600); margin-top: 2px; }
+.posting-detail { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+.posting-action {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.posting-action.action-apply {
+  background: var(--blue-600);
+  color: white;
+}
+.posting-action.action-apply:hover { background: var(--blue-700); }
+.posting-action.action-applied {
+  background: var(--green-100);
+  color: var(--green-500);
+  pointer-events: none;
+}
+.posting-action.action-call {
+  background: var(--amber-100);
+  color: #b7791f;
+}
+.posting-action.action-call:hover { background: #fef0cc; }
+
 /* ── Reports ─────────────────────────────────────────── */
 .reports-list { display: flex; flex-direction: column; gap: 8px; }
 .report-item {
@@ -398,7 +502,7 @@ footer {
 
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; }
+  .hero, .hero.hero-3 { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .schools-grid { grid-template-columns: 1fr; }
   .hero-big { font-size: 28px; }
