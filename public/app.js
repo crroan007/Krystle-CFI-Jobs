@@ -193,15 +193,16 @@
     $('#living-bills').textContent = `${money(b.monthly_bills)}/mo bills`;
     $('#living-months').textContent = `~${livingMonths} months runway`;
 
-    // Flight Fund
+    // Flight Fund -- show hours needed, not max purchasable
     const rentalRate = 75;
-    const rentalHrs = Math.floor(flightFund / rentalRate);
+    const hoursNeeded = stats.hours.remaining || 330;
+    const costNeeded = hoursNeeded * rentalRate;
     const flightPct = Math.min(100, pct(flightFund, b.starting_cash));
 
     $('#flight-display').textContent = money(flightFund);
     $('#flight-bar').style.width = flightPct + '%';
-    $('#flight-hours').textContent = `${fmt(rentalHrs)} rental hrs @ $${rentalRate}`;
-    $('#flight-pct').textContent = 'earmarked';
+    $('#flight-hours').textContent = `${fmt(hoursNeeded)} hrs needed @ $${rentalRate} = ${money(costNeeded)}`;
+    $('#flight-pct').textContent = flightFund >= costNeeded ? 'fully covered' : `${money(costNeeded - flightFund)} short`;
   }
 
   // ── Quick Stats ──────────────────────────────────────
