@@ -118,7 +118,20 @@ const handlers = {
     };
   },
   health() {
-    return { status: 'ok', timestamp: new Date().toISOString() };
+    const debugPaths = {
+      __dirname,
+      ROOT,
+      cwd: process.cwd(),
+      rootExists: existsSync(ROOT),
+      configExists: existsSync(join(ROOT, 'config')),
+      dataExists: existsSync(join(ROOT, 'data')),
+      profileExists: existsSync(join(ROOT, 'config/profile.yml')),
+      budgetExists: existsSync(join(ROOT, 'data/budget.yml')),
+      pipelineExists: existsSync(join(ROOT, 'data/pipeline.md')),
+    };
+    try { debugPaths.rootContents = readdirSync(ROOT).slice(0, 20); } catch(e) { debugPaths.rootContents = e.message; }
+    try { debugPaths.cwdContents = readdirSync(process.cwd()).slice(0, 20); } catch(e) { debugPaths.cwdContents = e.message; }
+    return { status: 'ok', timestamp: new Date().toISOString(), debug: debugPaths };
   },
 };
 
