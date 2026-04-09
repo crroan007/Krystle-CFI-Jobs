@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": "config/**,data/**,reports/**"
+    }
+  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.mjs" }
   ]

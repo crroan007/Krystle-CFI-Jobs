@@ -1,9 +1,12 @@
 // Vercel Serverless API -- all routes handled here
 import { readFileSync, readdirSync, existsSync } from 'fs';
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 
-const ROOT = join(process.cwd());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const ROOT = join(__dirname, '..');
 
 function readFile(rel) {
   const p = join(ROOT, rel);
