@@ -8,3 +8,5 @@ data/flight-school-jobs.db
 _reference/
 .env
 *.pid
+
+.vercel
