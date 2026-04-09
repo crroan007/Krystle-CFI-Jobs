@@ -1,0 +1,412 @@
+/* ── Flight School Jobs Dashboard ─────────────────────── */
+/* Aviation-themed: deep blue, clean, professional         */
+
+:root {
+  --blue-900: #0c2d48;
+  --blue-800: #14466b;
+  --blue-700: #1a5276;
+  --blue-600: #2471a3;
+  --blue-500: #2e86c1;
+  --blue-400: #5dade2;
+  --blue-100: #d6eaf8;
+  --blue-50:  #eaf2f8;
+  --green-500: #27ae60;
+  --green-100: #d5f5e3;
+  --amber-500: #f39c12;
+  --amber-100: #fef5e7;
+  --red-500: #e74c3c;
+  --red-100: #fadbd8;
+  --gray-50:  #f8f9fa;
+  --gray-100: #ecf0f1;
+  --gray-200: #d5d8dc;
+  --gray-400: #95a5a6;
+  --gray-600: #5d6d7e;
+  --gray-800: #2c3e50;
+  --gray-900: #1b2631;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.10), 0 8px 32px rgba(0,0,0,.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Header ──────────────────────────────────────────── */
+header {
+  background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+  color: white;
+  padding: 0 24px;
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon { font-size: 28px; }
+.brand h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+.subtitle { font-size: 12px; opacity: 0.75; font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge-live {
+  background: var(--green-500);
+  color: white;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.last-updated { font-size: 12px; opacity: 0.6; }
+
+/* ── Main ────────────────────────────────────────────── */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Hero Cards ──────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.hero-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.hours-card::before { background: linear-gradient(90deg, var(--blue-500), var(--blue-400)); }
+.budget-card::before { background: linear-gradient(90deg, var(--green-500), var(--amber-500)); }
+.hero-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-400);
+  margin-bottom: 8px;
+}
+.hero-big {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+.progress-bar {
+  height: 10px;
+  background: var(--gray-100);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--blue-600), var(--blue-400));
+  transition: width 1s ease;
+}
+.budget-fill {
+  background: linear-gradient(90deg, var(--green-500), var(--amber-500));
+}
+.hero-sub {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+/* ── Hour Breakdown Grid ─────────────────────────────── */
+.hour-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+.hour-item {
+  text-align: center;
+  padding: 16px;
+  background: var(--blue-50);
+  border-radius: 8px;
+}
+.hour-item .hour-val {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--blue-700);
+}
+.hour-item .hour-label {
+  font-size: 12px;
+  color: var(--gray-600);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ── Stats Row ───────────────────────────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.stat-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.stat-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--blue-700);
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--gray-400);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* ── Card ────────────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: var(--shadow);
+}
+.card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card-badge {
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+/* ── Tables ──────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+thead th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-400);
+  border-bottom: 2px solid var(--gray-100);
+  white-space: nowrap;
+}
+tbody td {
+  padding: 12px;
+  border-bottom: 1px solid var(--gray-100);
+  vertical-align: top;
+}
+tbody tr:hover { background: var(--blue-50); }
+.empty-state {
+  text-align: center;
+  color: var(--gray-400);
+  font-style: italic;
+  padding: 32px 12px !important;
+}
+
+/* Status badges */
+.status {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-evaluated { background: var(--blue-100); color: var(--blue-700); }
+.status-applied   { background: var(--amber-100); color: #b7791f; }
+.status-contacted { background: #e8daef; color: #6c3483; }
+.status-responded { background: var(--green-100); color: #1e8449; }
+.status-interview { background: var(--green-100); color: var(--green-500); }
+.status-offer     { background: #d4efdf; color: #196f3d; }
+.status-hired     { background: var(--green-500); color: white; }
+.status-rejected  { background: var(--red-100); color: var(--red-500); }
+.status-passed    { background: var(--gray-100); color: var(--gray-600); }
+.status-skip      { background: var(--gray-100); color: var(--gray-400); }
+
+/* Score badges */
+.score { font-weight: 700; }
+.score-high { color: var(--green-500); }
+.score-mid  { color: var(--amber-500); }
+.score-low  { color: var(--red-500); }
+
+/* ── School Filters ──────────────────────────────────── */
+.school-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.filter-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.filter-btn:hover { border-color: var(--blue-400); color: var(--blue-600); }
+.filter-btn.active {
+  background: var(--blue-700);
+  color: white;
+  border-color: var(--blue-700);
+}
+
+/* ── Schools Grid ────────────────────────────────────── */
+.schools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+.school-card {
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.school-card:hover {
+  border-color: var(--blue-400);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.school-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--gray-900);
+}
+.school-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+}
+.school-tag {
+  background: var(--gray-100);
+  color: var(--gray-600);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.school-tag.airport { background: var(--blue-100); color: var(--blue-700); }
+.school-tag.distance { background: var(--green-100); color: #1e8449; }
+.school-tag.pay { background: var(--amber-100); color: #b7791f; }
+.school-contact {
+  font-size: 12px;
+  color: var(--gray-600);
+  margin-top: auto;
+}
+.school-contact a {
+  color: var(--blue-600);
+  text-decoration: none;
+}
+.school-contact a:hover { text-decoration: underline; }
+
+/* ── Reports ─────────────────────────────────────────── */
+.reports-list { display: flex; flex-direction: column; gap: 8px; }
+.report-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.report-item:hover { background: var(--blue-50); }
+.report-score {
+  font-size: 20px;
+  font-weight: 800;
+  min-width: 48px;
+  text-align: center;
+}
+.report-info { flex: 1; }
+.report-title { font-weight: 600; font-size: 15px; }
+.report-file { font-size: 12px; color: var(--gray-400); }
+
+/* ── Scenario Table Highlights ───────────────────────── */
+.scenario-best { background: var(--green-100); }
+.scenario-worst { background: var(--red-100); }
+
+/* ── Footer ──────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--gray-400);
+  font-size: 13px;
+}
+.footer-sub {
+  font-style: italic;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .schools-grid { grid-template-columns: 1fr; }
+  .hero-big { font-size: 28px; }
+  main { padding: 16px; gap: 16px; }
+  .header-inner { height: 56px; }
+  .brand h1 { font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .hour-grid { grid-template-columns: repeat(2, 1fr); }
+}

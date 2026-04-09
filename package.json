@@ -1,0 +1,21 @@
+{
+  "name": "flight-school-jobs",
+  "version": "1.0.0",
+  "description": "CFII job search automation and budget tracker for ATP hour building",
+  "type": "module",
+  "scripts": {
+    "pdf": "node generate-pdf.mjs",
+    "merge": "node merge-tracker.mjs",
+    "dedup": "node dedup-tracker.mjs",
+    "verify": "node verify-pipeline.mjs",
+    "doctor": "node doctor.mjs",
+    "test": "node test-all.mjs",
+    "start": "node server.mjs",
+    "dev": "node server.mjs"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "js-yaml": "^4.1.1",
+    "playwright": "^1.58.1"
+  }
+}

@@ -1,0 +1,94 @@
+# Krystle Roan -- CFII Profile
+
+candidate:
+  full_name: "Krystle Roan"
+  email: "krystle.hk@gmail.com"
+  phone: "678-458-3797"
+  location: "East Point, GA 30344"
+  address: "3351 Bachelor St, East Point, GA 30344"
+
+certifications:
+  - "Commercial Pilot; ASEL; Instrument Airplane"
+  - "Certified Flight Instructor, Instrument (CFII)"
+  - "Certified Flight Instructor (CFI)"
+  - "Restricted Radio Operator License"
+  - "FAA First Class Medical Certificate"
+
+current_hours:
+  total: 1170
+  pic: 1086
+  dual_given: 193
+  instrument: 277
+  cross_country: 583
+  night: 84
+
+target:
+  total_hours: 1500
+  hours_remaining: 330
+  deadline: "2026-09-30"
+
+home_base:
+  address: "3351 Bachelor St, East Point, GA 30344"
+  nearest_airports:
+    - code: KFTY
+      name: "Fulton County / Charlie Brown Field"
+      drive_min: 10
+    - code: KFFC
+      name: "Falcon Field, Peachtree City"
+      drive_min: 25
+    - code: KPDK
+      name: "DeKalb-Peachtree"
+      drive_min: 25
+    - code: KHMP
+      name: "Hampton / Speedway"
+      drive_min: 25
+    - code: KRYY
+      name: "McCollum Field, Kennesaw"
+      drive_min: 30
+
+target_roles:
+  primary:
+    - "Full-time CFII at Part 61 or Part 141 school"
+    - "Part-time CFII (20+ hrs/week flight time)"
+  secondary:
+    - "Independent CFII (own students)"
+    - "Ground instructor (supplement income)"
+
+compensation:
+  minimum_hourly: 20
+  target_hourly: 40
+  willing_to_negotiate: true
+  notes: "Priority is HOURS over pay. A $25/hr job flying 60hrs/month beats a $50/hr job flying 10hrs/month."
+
+availability:
+  start_date: "Immediately"
+  schedule: "Full-time preferred, part-time acceptable"
+  days: "6-7 days/week available"
+  early_morning: true
+  evenings: true
+  weekends: true
+
+preferences:
+  max_commute_minutes: 45
+  preferred_aircraft:
+    - Cessna 172
+    - Cessna 152
+    - Piper Archer
+    - Piper Warrior
+    - Piper Cherokee
+  preferred_school_type: "No strong preference -- hours are what matter"
+  deal_breakers:
+    - "Unpaid or volunteer-only positions"
+    - "Schools with known safety issues"
+    - "Requiring aircraft purchase or lease"
+
+narrative:
+  headline: "CFII and Delta Propel pathway pilot building toward ATP minimums, dedicated to safe and thorough instrument instruction"
+  strengths:
+    - "CFII certified with 193 hours dual given across Parts 61 and 141"
+    - "Delta Propel pathway pilot -- proven commitment to airline career track"
+    - "9 years airline operations experience as Delta flight attendant -- CRM, safety culture, professionalism"
+    - "Available immediately with fully flexible schedule (6-7 days/week)"
+    - "1,086 PIC hours -- highly experienced for a time-building CFII"
+    - "Active in aviation community -- WAI Outreach Co-Chair, Pilots and Paws volunteer"
+  why_hire: "Schools get a seasoned CFII with airline-grade professionalism, 1,086 PIC hours, and a guaranteed 330-hour commitment. Delta Propel means she's vetted by a major airline. No risk of sudden departure -- she needs the hours and will be a reliable, high-quality instructor for months."

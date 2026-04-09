@@ -1,0 +1,13 @@
+# Render Blueprint -- deploy with "New > Blueprint Instance" on render.com
+services:
+  - type: web
+    name: flight-school-jobs
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.mjs
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production

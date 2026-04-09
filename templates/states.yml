@@ -1,0 +1,49 @@
+# Canonical Application States
+# Only these values are valid in the Status column of applications.md
+
+states:
+  - name: Evaluated
+    description: Report completed, pending decision to apply
+    aliases: [evaluated, eval, scored]
+
+  - name: Applied
+    description: Application submitted (online, email, or in-person)
+    aliases: [applied, sent, submitted]
+
+  - name: Contacted
+    description: Cold outreach sent (email, phone call, walk-in)
+    aliases: [contacted, called, emailed, walked-in]
+
+  - name: Responded
+    description: School responded to application or outreach
+    aliases: [responded, replied, heard-back]
+
+  - name: Interview
+    description: Interview scheduled or completed
+    aliases: [interview, interviewing, scheduled]
+
+  - name: Offer
+    description: Job offer received
+    aliases: [offer, offered]
+
+  - name: Hired
+    description: Accepted offer and started working
+    aliases: [hired, accepted, working, started]
+
+  - name: Rejected
+    description: Rejected by the school
+    aliases: [rejected, declined-by-school, not-selected]
+
+  - name: Passed
+    description: Candidate chose not to pursue
+    aliases: [passed, declined, not-interested, withdrew]
+
+  - name: SKIP
+    description: Does not fit criteria, do not apply
+    aliases: [skip, no-fit, excluded]
+
+rules:
+  - "No markdown bold (**) in status field"
+  - "No dates in status field (use the date column)"
+  - "No extra text in status (use the notes column)"
+  - "Status must be exactly one of the canonical names above"

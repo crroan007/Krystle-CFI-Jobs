@@ -1,0 +1,10 @@
+node_modules/
+output/
+batch/tracker-additions/
+batch/logs/
+batch/batch-state.tsv
+batch/batch-runner.pid
+data/flight-school-jobs.db
+_reference/
+.env
+*.pid

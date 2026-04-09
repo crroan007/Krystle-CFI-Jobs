@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight School Jobs -- Command Center</title>
+  <link rel="stylesheet" href="/styles.css">
+  <!-- fonts loaded via CSS fallback -->
+</head>
+<body>
+  <!-- ── Header ──────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">&#9992;</span>
+        <div>
+          <h1>Flight School Jobs</h1>
+          <p class="subtitle" id="header-subtitle">CFII Command Center</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="badge badge-live" id="status-badge">LIVE</span>
+        <span class="last-updated" id="last-updated"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ── Hero: Hours + Budget ──────────────────────── -->
+    <section class="hero">
+      <div class="hero-card hours-card">
+        <div class="hero-label">ATP Hour Progress</div>
+        <div class="hero-big" id="hours-display">-- / 1,500</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="hours-bar" style="width:0%"></div>
+        </div>
+        <div class="hero-sub">
+          <span id="hours-remaining">-- hours remaining</span>
+          <span id="hours-pct">--%</span>
+        </div>
+      </div>
+      <div class="hero-card budget-card">
+        <div class="hero-label">Cash Runway</div>
+        <div class="hero-big" id="budget-display">$--</div>
+        <div class="progress-bar">
+          <div class="progress-fill budget-fill" id="budget-bar" style="width:0%"></div>
+        </div>
+        <div class="hero-sub">
+          <span id="budget-bills">$--/mo bills</span>
+          <span id="budget-months">-- months</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Hour Breakdown ────────────────────────────── -->
+    <section class="card">
+      <h2>Flight Hour Breakdown</h2>
+      <div class="hour-grid" id="hour-grid">
+        <!-- filled by JS -->
+      </div>
+    </section>
+
+    <!-- ── Quick Stats ───────────────────────────────── -->
+    <section class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-apps">0</div>
+        <div class="stat-label">Applications</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-schools">0</div>
+        <div class="stat-label">Schools Tracked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-reports">0</div>
+        <div class="stat-label">Reports</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-interviews">0</div>
+        <div class="stat-label">Interviews</div>
+      </div>
+    </section>
+
+    <!-- ── Applications Table ────────────────────────── -->
+    <section class="card">
+      <h2>Applications Tracker</h2>
+      <div class="table-wrap">
+        <table id="apps-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>School</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Score</th>
+              <th>Report</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="apps-body">
+            <tr><td colspan="8" class="empty-state">No applications yet. Run a scan to find openings.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── Budget Scenarios ──────────────────────────── -->
+    <section class="card">
+      <h2>Budget Scenarios (6-Month Projection)</h2>
+      <div class="table-wrap">
+        <table id="scenarios-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Monthly Net</th>
+              <th>Months to ATP</th>
+              <th>Ending Cash</th>
+              <th>ATP Date</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody id="scenarios-body">
+            <tr><td colspan="6" class="empty-state">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── Schools Directory ─────────────────────────── -->
+    <section class="card">
+      <h2>Flight Schools Directory <span class="card-badge" id="schools-count">0 schools</span></h2>
+      <div class="school-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="10">< 15 min</button>
+        <button class="filter-btn" data-filter="25">< 30 min</button>
+        <button class="filter-btn" data-filter="35">< 40 min</button>
+      </div>
+      <div class="schools-grid" id="schools-grid">
+        <!-- filled by JS -->
+      </div>
+    </section>
+
+    <!-- ── Reports ───────────────────────────────────── -->
+    <section class="card">
+      <h2>Evaluation Reports</h2>
+      <div class="reports-list" id="reports-list">
+        <div class="empty-state">No reports yet. Evaluate a job posting to generate one.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Flight School Jobs Command Center &mdash; Built for Krystle Roan</p>
+    <p class="footer-sub">Getting paid to fly, not paying to rent.</p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

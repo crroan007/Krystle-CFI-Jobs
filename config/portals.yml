@@ -1,0 +1,429 @@
+# Flight School Jobs -- Portal Scanner Configuration
+# All flight schools within 60 min of East Point, GA
+
+title_filter:
+  positive:
+    - CFI
+    - CFII
+    - flight instructor
+    - instrument instructor
+    - aviation instructor
+    - ground instructor
+    - certified flight instructor
+  negative:
+    - A&P
+    - mechanic
+    - dispatcher
+    - ramp
+    - line service
+    - admin
+    - receptionist
+    - fueler
+
+# ============================================================
+# TIER 1: Flight School Career Pages (Playwright direct scan)
+# Sorted by distance from East Point
+# ============================================================
+
+tracked_schools:
+
+  # --- KFTY - Fulton County / Charlie Brown Field (~10 min) ---
+
+  - name: Fulton Aviation
+    airport: KFTY
+    careers_url: https://fultonaviation.com
+    phone: "(678) 472-4365"
+    email: Brant@FultonAviation.com
+    type: "Part 141 & 61"
+    fleet: "Unknown -- inquire"
+    pay: "$20/hr confirmed (contract)"
+    notes: "Part-time contract CFI confirmed at $20/hr for ground+flight"
+    enabled: true
+    distance_min: 10
+
+  - name: South Atlanta Flight Training
+    airport: KFTY
+    careers_url: https://flysaft.com
+    type: "Part 141"
+    fleet: "Unknown"
+    enabled: true
+    distance_min: 10
+
+  - name: Faithful Guardian Aviation
+    airport: KFTY
+    careers_url: https://faithfulguardianaviation.com
+    phone: "(770) 462-0049"
+    type: "Part 61"
+    fleet: "C172N, C182, C310, C421, Piper Warrior, Cherokee 6 + 2 sims"
+    notes: "Large fleet, 100K+ combined hours. Worth calling."
+    enabled: true
+    distance_min: 10
+
+  - name: Atlanta Sport Flight
+    airport: KFTY
+    careers_url: https://atlantasportflight.com
+    type: "Part 61"
+    fleet: "SportCruiser LSA"
+    notes: "Sport pilot specialist -- may not need CFII"
+    enabled: true
+    distance_min: 10
+
+  # --- KFFC - Falcon Field, Peachtree City (~25 min) ---
+
+  - name: Horizon Aviation
+    airport: KFFC
+    careers_url: https://www.horizonaviationga.com
+    phone: "770-487-2225"
+    type: "Part 61"
+    fleet: "8 Pipers (Archer, Warrior, Cherokee)"
+    notes: "12 CFIs on staff. Says they want instructors to succeed."
+    enabled: true
+    distance_min: 25
+
+  - name: Academy of Aviation
+    airport: KFFC
+    careers_url: https://www.academyofaviation.com/atlanta/
+    type: "Part 141"
+    fleet: "Unknown"
+    notes: "Delta Propel partner. CFI/CFII/MEI program."
+    enabled: true
+    distance_min: 25
+
+  - name: Centennial Aviation Academy
+    airport: KFFC
+    careers_url: https://www.flywithcaa.com
+    phone: "(678) 686-9086"
+    email: support@flywithcaa.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "AOPA Distinguished Flight School 2021-22, top 10 nationally."
+    enabled: true
+    distance_min: 25
+
+  - name: FLYT Aviation / US Aviation Academy
+    airport: KFFC
+    careers_url: https://www.flytaviation.com
+    type: "Part 141"
+    fleet: "Unknown"
+    pay: "~$32/hr average (Glassdoor)"
+    notes: "90%+ instructor hiring rate for graduates. Career pathway."
+    enabled: true
+    distance_min: 25
+
+  # --- KPDK - DeKalb-Peachtree (~25 min) ---
+
+  - name: Skybound Aviation
+    airport: KPDK
+    careers_url: https://www.skybnd.com
+    phone: "(678) 691-3283"
+    email: info@skybnd.com
+    type: "Part 141 & 61"
+    fleet: "Unknown"
+    notes: "AOPA Honor Roll. Instructors are independent contractors."
+    enabled: true
+    distance_min: 25
+
+  - name: All2fly Aviation Academy
+    airport: KPDK
+    careers_url: https://all2flyaviation.com
+    type: "Part 61"
+    fleet: "Unknown"
+    pay: "Unknown"
+    notes: "CFII required. Do not call -- resume only. 3187 Corsair Dr, Atlanta 30341."
+    enabled: true
+    distance_min: 25
+
+  - name: NSPIRE Aviation
+    airport: KPDK
+    careers_url: https://nspireaviation.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Founded 2018, Globe Building at PDK."
+    enabled: true
+    distance_min: 25
+
+  - name: Quality Aviation
+    airport: KPDK
+    careers_url: https://qualityaviation.net
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Est. 1985, 30+ years. Instructor of the year 2013."
+    enabled: true
+    distance_min: 25
+
+  - name: Advanced Aviation
+    airport: KPDK
+    careers_url: https://advancedaviation.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "10+ CFIs. Also at KLZU."
+    enabled: true
+    distance_min: 25
+
+  - name: American Air Flight Training
+    airport: KPDK
+    careers_url: https://fly-aaft.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Steve Shaner, 50+ yrs experience."
+    enabled: true
+    distance_min: 25
+
+  - name: Lanier Flight Center (PDK)
+    airport: KPDK
+    careers_url: https://www.lanierflightcenter.com/employment/
+    phone: "(678) 989-2395"
+    email: info@lanierflightcenter.com
+    type: "Part 61"
+    fleet: "1974 Cessna 150L, Pipistrel Alpha Trainer"
+    enabled: true
+    distance_min: 25
+
+  # --- KHMP - Hampton / Speedway (~25 min) ---
+
+  - name: SAFI (South Atlanta Flight Instruction)
+    airport: KHMP
+    careers_url: https://flysafi.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "ACTIVELY HIRING CFI/CFII. ~25 min from Peachtree City."
+    enabled: true
+    distance_min: 25
+
+  - name: Speedway Flight Training
+    airport: KHMP
+    careers_url: https://speedwayft.com
+    phone: "(678) 944-7379"
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Open 6 AM - 11:30 PM daily. Long hours = more flying."
+    enabled: true
+    distance_min: 25
+
+  # --- KRYY - McCollum Field, Kennesaw (~30 min) ---
+
+  - name: Atlanta Air Academy
+    airport: KRYY
+    careers_url: https://www.atlantaairacademy.com/general-5
+    type: "Part 61 (also 141)"
+    fleet: "Unknown"
+    notes: "ACTIVELY HIRING full-time CFI/CFII. Founded 2015."
+    enabled: true
+    distance_min: 30
+
+  - name: Superior Flight School
+    airport: KRYY
+    careers_url: https://superiorflightschool.com
+    type: "Part 141 & 61"
+    fleet: "Unknown"
+    notes: "30 years in business. Self-Examining Authority."
+    enabled: true
+    distance_min: 30
+
+  - name: Aero Atlanta Flight Center
+    airport: KRYY
+    careers_url: https://aeroatlanta.com
+    type: "Part 61"
+    fleet: "Cirrus (CSIP training center)"
+    notes: "Since 1989. Cirrus-focused."
+    enabled: true
+    distance_min: 30
+
+  - name: Hangar 913
+    airport: KRYY
+    careers_url: https://hangar913.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Budget-friendly training."
+    enabled: true
+    distance_min: 30
+
+  # --- KCCO - Newnan-Coweta (~30 min) ---
+
+  - name: Newnan Flight Training
+    airport: KCCO
+    careers_url: https://newnanflighttraining.com
+    type: "Part 61"
+    fleet: "Tailwheel + aerobatic capable"
+    notes: "3 Gold Seal CFIs. Est. 2020. Growing school."
+    enabled: true
+    distance_min: 30
+
+  # --- KLZU - Briscoe Field, Lawrenceville (~40 min) ---
+
+  - name: The Flight School of Gwinnett
+    airport: KLZU
+    careers_url: https://theflightschool.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Est. 1982. Thousands of graduates."
+    enabled: true
+    distance_min: 40
+
+  - name: Magnolia Aviation Academy
+    airport: KLZU
+    careers_url: https://magnoliaaviation.com
+    phone: "(678) 226-1263"
+    type: "Part 141 & 61"
+    fleet: "Unknown"
+    notes: "25-day CFI/CFII courses. Active training operation."
+    enabled: true
+    distance_min: 40
+
+  - name: Airlanta
+    airport: KLZU
+    careers_url: https://flyairlanta.com
+    type: "Part 141 & 61"
+    fleet: "Unknown"
+    notes: "PPL, IR, Comm, CFI training."
+    enabled: true
+    distance_min: 40
+
+  - name: Advanced Aviation (LZU)
+    airport: KLZU
+    careers_url: https://advancedaviation.com
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Also at PDK. 10+ CFIs."
+    enabled: true
+    distance_min: 40
+
+  # --- KCTJ - Carrollton (~45 min) ---
+
+  - name: West Georgia Flight School
+    airport: KCTJ
+    careers_url: https://westgaflightschool.com
+    phone: "210-942-3597"
+    type: "Part 61"
+    fleet: "Cessna 152"
+    pay: "$60/hr instruction rate"
+    notes: "C152 rental $75/hr wet. Cheapest rental in the area."
+    enabled: true
+    distance_min: 45
+
+  # --- KGVL - Lee Gilmer, Gainesville (~60 min) ---
+
+  - name: North Georgia Aviation
+    airport: KGVL
+    careers_url: https://aviationnga.com/careers/
+    type: "Part 61"
+    fleet: "Cirrus (CSIP/TCI focus)"
+    notes: "3-step CFI hiring process. Cirrus-focused."
+    enabled: true
+    distance_min: 60
+
+  - name: SkyWings Aviation
+    airport: KGVL
+    careers_url: https://skywingsaviation.net
+    type: "Part 61"
+    fleet: "Unknown"
+    notes: "Scenario-based training."
+    enabled: true
+    distance_min: 60
+
+  - name: Lanier Flight Center (GVL)
+    airport: KGVL
+    careers_url: https://www.lanierflightcenter.com/employment/
+    phone: "(678) 989-2395"
+    email: info@lanierflightcenter.com
+    type: "Part 141 & 61"
+    fleet: "Cessna 150L, Pipistrel Alpha Trainer"
+    notes: "Premier FBO with charter + training."
+    enabled: true
+    distance_min: 60
+
+  # --- ATP Flight School - Multiple Atlanta locations ---
+
+  - name: ATP Flight School
+    airport: "KRYY, KPDK, KLZU, KFFC, KFTY"
+    careers_url: https://atpflightschool.com/jobs/
+    type: "Part 141"
+    fleet: "C172, PA-44, DA42"
+    pay: "$38K-$48K salary"
+    notes: "Salaried. 39 airline partnerships. Career track to regionals."
+    enabled: true
+    distance_min: 10
+
+# ============================================================
+# TIER 2: Job Board Searches
+# ============================================================
+
+job_boards:
+
+  - name: JSfirm
+    method: scrape
+    url: "https://www.jsfirm.com/aviation-jobs?keyword=flight+instructor&location=Georgia&category=Flight+Instructor"
+    enabled: true
+
+  - name: Pilot Career Center
+    method: scrape
+    url: "https://pilotcareercenter.com/ATLANTA-PILOT-JOBS/"
+    enabled: true
+
+  - name: PDK Airport Jobs
+    method: scrape
+    url: "https://www.pdkairport.com/aviation-jobs"
+    enabled: true
+
+  - name: Avjobs
+    method: scrape
+    url: "https://www.avjobs.com/jobs/positions.asp?ctry=United+States&s=GA&c=Atlanta"
+    enabled: true
+
+  - name: Skyfarer Academy
+    method: scrape
+    url: "https://skyfareracademy.com"
+    notes: "Independent CFI marketplace. Free to join, set own rates."
+    enabled: true
+
+# ============================================================
+# TIER 3: Personal Ads / Gig Sources (RSS)
+# ============================================================
+
+personal_ads:
+
+  - name: Craigslist Atlanta - Gigs
+    method: rss
+    url: "https://atlanta.craigslist.org/search/gig?query=flight+instructor&format=rss&search_distance=50&postal=30344"
+    enabled: true
+
+  - name: Craigslist Atlanta - Community
+    method: rss
+    url: "https://atlanta.craigslist.org/search/ccc?query=flight+instruction&format=rss&search_distance=50&postal=30344"
+    enabled: true
+
+  - name: Craigslist Atlanta - Jobs
+    method: rss
+    url: "https://atlanta.craigslist.org/search/jjj?query=CFI&format=rss&search_distance=50&postal=30344"
+    enabled: true
+
+  - name: Craigslist Atlanta - Gigs (CFII)
+    method: rss
+    url: "https://atlanta.craigslist.org/search/gig?query=CFII&format=rss&search_distance=50&postal=30344"
+    enabled: true
+
+# ============================================================
+# MANUAL MONITORING (cannot automate)
+# ============================================================
+
+facebook_groups:
+  - name: "GA Aviation Community"
+    url: "https://www.facebook.com/groups/1771418436476702/"
+    notes: "Turn on notifications. Post asking about instructor openings."
+  - name: "Atlanta Pilots"
+    notes: "Search for group on Facebook. Join and monitor."
+  - name: "Georgia Aviators"
+    notes: "Search for group on Facebook. Join and monitor."
+  - name: "Southeast Aviation Community"
+    notes: "Regional group -- broader net."
+
+manual_job_alerts:
+  - name: Indeed
+    setup: "Go to indeed.com, search 'flight instructor' in Atlanta GA, click 'Create job alert'"
+  - name: LinkedIn
+    setup: "Search 'CFI OR CFII OR flight instructor' in Atlanta, click 'Set alert'"
+  - name: ZipRecruiter
+    setup: "Go to ziprecruiter.com, search 'flight instructor' near Atlanta, enable email alerts"
+  - name: SAFE Job Board
+    url: "https://safepilots.org/members-only/job-opportunities/"
+    setup: "Society of Aviation and Flight Educators. Check periodically."

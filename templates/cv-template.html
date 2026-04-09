@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{NAME}} -- CFII Resume</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #1a1a2e;
+    background: #ffffff;
+    padding: 0;
+    margin: 0;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 2px 0;
+  }
+
+  /* === HEADER === */
+  .header { margin-bottom: 18px; }
+
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a2e;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+
+  .header-gradient {
+    height: 2px;
+    background: linear-gradient(to right, #1a5276, #2e86c1);
+    border-radius: 1px;
+    margin-bottom: 8px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: #555;
+  }
+
+  .contact-row a { color: #555; text-decoration: none; }
+  .contact-row .separator { color: #ccc; }
+
+  /* === CERTIFICATIONS BANNER === */
+  .cert-banner {
+    background: #eaf2f8;
+    border: 1px solid #d4e6f1;
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    align-items: center;
+  }
+
+  .cert-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1a5276;
+  }
+
+  .hours-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a5276;
+    background: #d4e6f1;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* === SECTIONS === */
+  .section { margin-bottom: 16px; }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #1a5276;
+    border-bottom: 1.5px solid #e2e2e2;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  /* === SUMMARY === */
+  .summary-text {
+    font-size: 11px;
+    line-height: 1.7;
+    color: #2f2f2f;
+  }
+
+  /* === FLIGHT HOURS TABLE === */
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+  }
+
+  .hours-table td {
+    font-size: 10.5px;
+    padding: 3px 8px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .hours-table td:first-child {
+    font-weight: 600;
+    color: #333;
+    width: 40%;
+  }
+
+  .hours-table td:last-child {
+    color: #1a5276;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* === EXPERIENCE === */
+  .job { margin-bottom: 12px; }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 3px;
+  }
+
+  .job-company {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a5276;
+  }
+
+  .job-period {
+    font-size: 10.5px;
+    color: #777;
+    white-space: nowrap;
+  }
+
+  .job-role {
+    font-size: 11px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+  }
+
+  .job-location {
+    font-size: 10px;
+    color: #888;
+  }
+
+  .job ul { padding-left: 18px; margin-top: 4px; }
+
+  .job li {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 3px;
+  }
+
+  .job li strong { font-weight: 600; }
+
+  /* === EDUCATION & CERTS === */
+  .edu-item { margin-bottom: 6px; }
+
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .edu-title { font-weight: 600; font-size: 11px; color: #333; }
+  .edu-org { color: #1a5276; font-weight: 500; }
+  .edu-year { font-size: 10px; color: #777; white-space: nowrap; }
+
+  /* === SKILLS === */
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+
+  .skill-item { font-size: 10.5px; color: #444; }
+  .skill-category { font-weight: 600; color: #333; }
+
+  /* === PRINT === */
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { padding: 0; }
+  }
+
+  .avoid-break, .job, .edu-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header avoid-break">
+    <h1>{{NAME}}</h1>
+    <div class="header-gradient"></div>
+    <div class="contact-row">
+      <span>{{EMAIL}}</span>
+      <span class="separator">|</span>
+      <span>{{PHONE}}</span>
+      <span class="separator">|</span>
+      <span>{{LOCATION}}</span>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS BANNER -->
+  <div class="cert-banner avoid-break">
+    {{CERT_TAGS}}
+    <span class="hours-tag">{{TOTAL_HOURS}} Total Flight Hours</span>
+  </div>
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <div class="section avoid-break">
+    <div class="section-title">Professional Summary</div>
+    <div class="summary-text">{{SUMMARY_TEXT}}</div>
+  </div>
+
+  <!-- FLIGHT EXPERIENCE -->
+  <div class="section avoid-break">
+    <div class="section-title">Flight Experience</div>
+    <table class="hours-table">
+      {{HOURS_TABLE}}
+    </table>
+  </div>
+
+  <!-- AIRCRAFT PROFICIENCY -->
+  <div class="section avoid-break">
+    <div class="section-title">Aircraft Proficiency</div>
+    <div class="skills-grid">
+      {{AIRCRAFT}}
+    </div>
+  </div>
+
+  <!-- INSTRUCTION EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Instruction Experience</div>
+    {{EXPERIENCE}}
+  </div>
+
+  <!-- EDUCATION & TRAINING -->
+  <div class="section avoid-break">
+    <div class="section-title">Education & Training</div>
+    {{EDUCATION}}
+  </div>
+
+  <!-- CERTIFICATIONS & RATINGS -->
+  <div class="section avoid-break">
+    <div class="section-title">Certifications & Ratings</div>
+    {{CERTIFICATIONS_DETAIL}}
+  </div>
+
+  <!-- ADDITIONAL SKILLS -->
+  <div class="section avoid-break">
+    <div class="section-title">Additional Skills</div>
+    <div class="skills-grid">
+      {{SKILLS}}
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

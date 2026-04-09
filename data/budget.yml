@@ -1,0 +1,130 @@
+# Budget & Financial Data
+# Last updated: 2026-04-09
+
+starting_cash: 82616
+cash_breakdown:
+  - label: "Primary savings"
+    amount: 46564
+  - label: "Secondary savings"
+    amount: 23782
+  - label: "Reserve 1"
+    amount: 6000
+  - label: "Reserve 2"
+    amount: 6000
+  - label: "Cash on hand"
+    amount: 270
+
+monthly_bills: 7000
+bill_categories:
+  # UPDATE: Break down the $7K into actual categories
+  - category: "Rent/Mortgage"
+    amount: 0
+  - category: "Car Payment"
+    amount: 0
+  - category: "Insurance (all)"
+    amount: 0
+  - category: "Utilities"
+    amount: 0
+  - category: "Food/Groceries"
+    amount: 0
+  - category: "Phone/Internet"
+    amount: 0
+  - category: "Other"
+    amount: 0
+
+budget_start: "2026-04-01"
+budget_end: "2026-09-30"
+budget_months: 6
+danger_zone: 5000  # Flag when cash drops below this
+
+# Flight Hour Tracking
+current_hours: 1170
+target_hours: 1500
+hours_remaining: 330
+
+# Pre-calculated projections
+fixed_burn_6_months: 42000  # 6 x $7,000
+available_for_flying: 40616  # $82,616 - $42,000
+
+# ============================================================
+# SCENARIO PROJECTIONS
+# ============================================================
+
+scenarios:
+
+  - name: "A: Pure Rental (C152 at West GA - cheapest)"
+    type: rental
+    description: "Rent the cheapest plane and grind hours. No income from flying."
+    rate_per_hour: 75
+    hours_per_month: 50
+    monthly_flight_cost: 3750  # 50 x $75
+    monthly_income: 0
+    monthly_net: -10750  # -$7,000 bills - $3,750 flying
+    months_to_300_hours: 6
+    total_flight_cost: 22500  # 300 x $75
+    ending_cash: 17616  # $82,616 - $42,000 - $22,500 - membership fees
+    projected_atp_date: "2026-10-01"
+    verdict: "Expensive but guaranteed hours. Burns through savings fast."
+
+  - name: "B: Full-time CFII (employed at $40/hr)"
+    type: instructing
+    description: "Get hired full-time. Earn money AND log hours simultaneously."
+    rate_per_hour: 0
+    hours_per_month: 60
+    monthly_flight_cost: 0
+    monthly_income: 2400  # $40/hr x 60hrs
+    monthly_net: -4600  # -$7,000 bills + $2,400 income
+    months_to_300_hours: 5
+    total_flight_cost: 0
+    ending_cash: 55016  # $82,616 - (5 x $4,600) (roughly)
+    projected_atp_date: "2026-09-01"
+    verdict: "BEST SCENARIO. Gets paid to build hours. Preserves most cash."
+
+  - name: "C: Hybrid (part-time instruct + rent on off days)"
+    type: hybrid
+    description: "Instruct part-time for income, rent cheap plane on off days for extra hours."
+    instruct_hours_per_month: 40
+    instruct_pay_per_hour: 40
+    rental_hours_per_month: 20
+    rental_rate_per_hour: 75
+    monthly_flight_cost: 1500  # 20 x $75
+    monthly_income: 1600  # $40 x 40hrs
+    monthly_net: -6900  # -$7,000 - $1,500 + $1,600
+    total_hours_per_month: 60
+    months_to_300_hours: 5
+    total_flight_cost: 7500  # 5 months x $1,500
+    ending_cash: 41616  # roughly
+    projected_atp_date: "2026-09-01"
+    verdict: "Good balance. Income offsets most rental costs."
+
+  - name: "D: Part-time CFII only ($25/hr, 20hrs/week)"
+    type: instructing
+    description: "Lower-paying part-time job. Fewer hours but still getting paid."
+    rate_per_hour: 0
+    hours_per_month: 40
+    monthly_flight_cost: 0
+    monthly_income: 1000  # $25/hr x 40hrs
+    monthly_net: -6000  # -$7,000 + $1,000
+    months_to_300_hours: 7.5
+    total_flight_cost: 0
+    ending_cash: 37616  # roughly
+    projected_atp_date: "2026-11-15"
+    verdict: "Slow but free. May not hit ATP by September deadline."
+
+# ============================================================
+# BREAK-EVEN ANALYSIS
+# ============================================================
+
+break_even:
+  notes: |
+    At $75/hr rental (cheapest option):
+    - Each hour of instructing at $40/hr offsets 0.53 hours of rental ($40/$75)
+    - To offset 1 hour of $75 rental, need 1.875 hours at $40/hr
+    - To offset 1 hour of $75 rental, need 1.5 hours at $50/hr
+    - To offset 1 hour of $75 rental, need 1.25 hours at $60/hr
+
+    Instructing is ALWAYS better than renting because:
+    1. You earn money instead of spending it
+    2. You still log flight hours (dual given counts)
+    3. You build connections for future airline apps
+    4. Schools may offer free aircraft time as a perk
